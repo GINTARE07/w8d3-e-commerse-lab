@@ -47,7 +47,7 @@ const handleSelectedItem=(item)=> {
           <Route path="/" element={<Home/>} />
           <Route path="/items" element={< Items items ={itemList} handleSelectedItem={handleSelectedItem}/>}/>
 
-          <Route path="/basket" element={< Basket/>} />
+          <Route path="/basket" element={< Basket basketList={basketList}/>} />
         </Routes>
  
     </Router>
