@@ -20,24 +20,33 @@ function App() {
 
 
   const [itemList, setItemList] = useState (items);
-  
+  const [selectedItem, setSelectedItem] = useState (null);
   const [basketList, setBasketList] = useState ([]);
 
-  const addToBasket = (item)=>{
-    let newBasketList = [...basketList]
-    newBasketList.push(item)
-    setBasketList(newBasketList)
-}
+    const addToBasket = (item)=>{
+      if (item!== null){
+      let newBasketList = [...basketList]
+      newBasketList.push(item)
+      setBasketList(newBasketList)
+      setSelectedItem(null)
+    };
+};
 
+  useEffect(()=> {
+    addToBasket(selectedItem)
+  }, [selectedItem]);
 
-
+const handleSelectedItem=(item)=> {
+  setSelectedItem(item)
+};
 
   return (
     <Router>
       <NavBar />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/items" element={< Items items ={itemList} addToBasket={addToBasket}/>}/>
+          <Route path="/items" element={< Items items ={itemList} handleSelectedItem={handleSelectedItem}/>}/>
+
           <Route path="/basket" element={< Basket/>} />
         </Routes>
  
@@ -45,5 +54,6 @@ function App() {
     
   );
 }
+
 
 export default App;
